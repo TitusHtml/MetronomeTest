@@ -213,7 +213,7 @@
         gain.connect(audioCtx.destination);
         osc.type = 'sine';
         osc.frequency.value = 220;          // low, soft tone
-        gain.gain.setValueAtTime(0.25, audioCtx.currentTime);
+        gain.gain.setValueAtTime(0.40, audioCtx.currentTime);
         gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.12);
         osc.start();
         osc.stop(audioCtx.currentTime + 0.12);
