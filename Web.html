@@ -3,7 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-  <title>Calm Pulse — 50–60 BPM</title>
+  <title>Neuro Calm — 50–60 BPM</title>
+  
+  <!-- Google Fonts: Nunito (regular 400) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400&display=swap" rel="stylesheet">
+
   <style>
     * {
       margin: 0;
@@ -15,7 +21,7 @@
       height: 100vh;
       background: #2d2d2d;
       color: #e2e8f0;
-      font-family: system-ui, -apple-system, BlinkMacOSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-family: 'Nunito', system-ui, -apple-system, BlinkMacOSystemFont, 'Segoe UI', Roboto, sans-serif;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -25,65 +31,86 @@
       touch-action: manipulation;
     }
 
+    .logo-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.2rem;              /* increased */
+      margin-bottom: 2.5rem;    /* raised more */
+    }
+
+    .logo {
+      width: 130px;             /* slightly larger */
+      height: auto;
+      max-width: 38vw;
+      filter: drop-shadow(0 5px 14px rgba(0,0,0,0.28));
+      transition: transform 0.3s ease;
+    }
+
+    .logo:hover {
+      transform: scale(1.05);
+    }
+
     h1 {
-      font-size: 1.5rem;
+      font-size: 2rem;          /* larger title */
       font-weight: 400;
-      color: #94a3b8;
-      margin-bottom: 2rem;
-      letter-spacing: 0.4px;
-      opacity: 0.85;
+      color: #a5b4fc;
+      margin: 0;
+      letter-spacing: 1.2px;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.35);
     }
 
     .container {
       background: rgba(45, 45, 45, 0.78);
       backdrop-filter: blur(14px);
-      border-radius: 28px;
-      padding: 2.2rem 1.8rem;
+      border-radius: 32px;
+      padding: 2.8rem 2rem;     /* increased padding */
       width: 92%;
-      max-width: 380px;
-      border: 1px solid rgba(148, 163, 184, 0.10);
-      box-shadow: 0 12px 48px rgba(0,0,0,0.55);
+      max-width: 400px;         /* slightly wider */
+      border: 1px solid rgba(148, 163, 184, 0.12);
+      box-shadow: 0 14px 52px rgba(0,0,0,0.58);
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 2rem;
+      gap: 2.6rem;              /* more space inside */
     }
 
     #bpm-display {
-      font-size: 5.2rem;
-      font-weight: 280;
+      font-size: 5.6rem;        /* raised size */
+      font-weight: 400;
       color: #a5b4fc;
-      text-shadow: 0 3px 16px rgba(165,180,252,0.22);
+      text-shadow: 0 4px 18px rgba(165,180,252,0.25);
       line-height: 1;
+      margin-bottom: 0.8rem;    /* extra breathing room */
     }
 
     input[type="range"] {
       width: 100%;
-      height: 8px;
-      margin: 0.8rem 0 1.6rem 0;
-      background: rgba(148,163,184,0.20);
-      border-radius: 4px;
+      height: 10px;             /* thicker for easier touch */
+      margin: 1rem 0 2rem 0;    /* more vertical space */
+      background: rgba(148,163,184,0.22);
+      border-radius: 5px;
       appearance: none;
       outline: none;
     }
 
     input[type="range"]::-webkit-slider-thumb {
       appearance: none;
-      width: 28px;
-      height: 28px;
+      width: 32px;
+      height: 32px;
       background: #a5b4fc;
       border-radius: 50%;
-      box-shadow: 0 3px 12px rgba(165,180,252,0.35);
+      box-shadow: 0 4px 14px rgba(165,180,252,0.4);
       cursor: pointer;
     }
 
     input[type="range"]::-moz-range-thumb {
-      width: 28px;
-      height: 28px;
+      width: 32px;
+      height: 32px;
       background: #a5b4fc;
       border: none;
       border-radius: 50%;
-      box-shadow: 0 3px 12px rgba(165,180,252,0.35);
+      box-shadow: 0 4px 14px rgba(165,180,252,0.4);
       cursor: pointer;
     }
 
@@ -91,7 +118,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 1.8rem;
+      gap: 2.2rem;              /* more space */
       width: 100%;
     }
 
@@ -103,22 +130,29 @@
     .options-row {
       display: flex;
       flex-wrap: wrap;
-      gap: 1.4rem;
+      gap: 1.6rem 2.4rem;       /* increased gap */
       justify-content: center;
       align-items: center;
       width: 100%;
     }
 
+    .color-group {
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 1rem;
+      align-items: center;
+    }
+
     button {
-      padding: 1rem 1.8rem;
-      font-size: 1.05rem;
-      font-weight: 500;
+      padding: 1.1rem 2rem;     /* larger touch area */
+      font-size: 1.1rem;
+      font-weight: 400;
       border: none;
-      border-radius: 20px;
+      border-radius: 22px;
       cursor: pointer;
-      transition: all 0.24s ease;
-      letter-spacing: 0.3px;
-      min-width: 110px;
+      transition: all 0.26s ease;
+      letter-spacing: 0.4px;
+      min-width: 120px;
       touch-action: manipulation;
     }
 
@@ -129,7 +163,7 @@
     #startStop {
       background: #334155;
       color: #f1f5f9;
-      min-width: 160px;
+      min-width: 170px;
     }
     #startStop.running {
       background: #475569;
@@ -142,7 +176,7 @@
     }
     #blueBtn.active {
       background: #3b82f6;
-      box-shadow: 0 0 0 4px rgba(59,130,246,0.35);
+      box-shadow: 0 0 0 4px rgba(59,130,246,0.38);
     }
 
     #purpleBtn {
@@ -151,23 +185,23 @@
     }
     #purpleBtn.active {
       background: #8b5cf6;
-      box-shadow: 0 0 0 4px rgba(139,92,246,0.35);
+      box-shadow: 0 0 0 4px rgba(139,92,246,0.38);
     }
 
     .pulse-control {
       display: flex;
       align-items: center;
-      gap: 1rem;
-      font-size: 1.1rem;
+      gap: 1.2rem;
+      font-size: 1.15rem;
       color: #cbd5e1;
-      font-weight: 450;
+      font-weight: 400;
     }
 
     .switch {
       position: relative;
       display: inline-block;
-      width: 58px;
-      height: 30px;
+      width: 62px;
+      height: 32px;
     }
 
     .switch input {
@@ -184,19 +218,19 @@
       right: 0;
       bottom: 0;
       background-color: #1e293b;
-      transition: .26s;
-      border-radius: 30px;
+      transition: .28s;
+      border-radius: 32px;
     }
 
     .slider:before {
       position: absolute;
       content: "";
-      height: 24px;
-      width: 24px;
+      height: 26px;
+      width: 26px;
       left: 3px;
       bottom: 3px;
       background-color: white;
-      transition: .26s;
+      transition: .28s;
       border-radius: 50%;
     }
 
@@ -205,7 +239,7 @@
     }
 
     input:checked + .slider:before {
-      transform: translateX(28px);
+      transform: translateX(30px);
     }
 
     body.pulse-on {
@@ -217,16 +251,46 @@
       body.pulse-on, body { transition: none; }
     }
 
+    /* Footer website link */
+    .footer {
+      margin-top: 2rem;
+      font-size: 0.95rem;
+      color: #94a3b8;
+      opacity: 0.8;
+      text-align: center;
+      letter-spacing: 0.5px;
+    }
+
+    .footer a {
+      color: #a5b4fc;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .footer a:hover {
+      color: #c7d2fe;
+    }
+
     @media (max-height: 680px) {
-      h1 { margin-bottom: 1.4rem; }
-      .container { padding: 1.8rem 1.6rem; gap: 1.6rem; }
-      #bpm-display { font-size: 4.6rem; }
+      .logo-container { margin-bottom: 1.8rem; }
+      .container { padding: 2.2rem 1.8rem; gap: 2rem; }
+      #bpm-display { font-size: 5rem; }
+      .logo { width: 110px; }
+    }
+
+    @media (max-width: 360px) {
+      .options-row { gap: 1.2rem 1.6rem; }
+      button { padding: 1rem 1.6rem; min-width: 110px; font-size: 1rem; }
+      .color-group { gap: 0.8rem; }
     }
   </style>
 </head>
 <body>
 
-  <h1>Calm Pulse</h1>
+  <div class="logo-container">
+    <img src="https://i.imgur.com/a097b0I.png" alt="Neuro Calm Logo" class="logo">
+    <h1>Neuro Calm</h1>
+  </div>
 
   <div class="container">
     <div id="bpm-display">54</div>
@@ -242,22 +306,28 @@
         <div class="pulse-control">
           <span>Light</span>
           <label class="switch">
-            <input type="checkbox" id="pulse-toggle" checked>
+            <input type="checkbox" id="pulse-toggle">
             <span class="slider"></span>
           </label>
         </div>
 
-        <button id="blueBtn" class="active">Blue</button>
-        <button id="purpleBtn">Purple</button>
+        <div class="color-group">
+          <button id="blueBtn" class="active">Blue</button>
+          <button id="purpleBtn">Purple</button>
+        </div>
       </div>
     </div>
+  </div>
+
+  <div class="footer">
+    <a href="https://ThriveNeuroHealth.com" target="_blank">ThriveNeuroHealth.com</a>
   </div>
 
   <script>
     let audioCtx = null;
     let timerID = null;
     let isRunning = false;
-    let pulseEnabled = true;
+    let pulseEnabled = false;
     let pulseColor = 'blue';
 
     const body = document.body;
@@ -267,6 +337,8 @@
     const pulseToggle = document.getElementById('pulse-toggle');
     const blueBtn = document.getElementById('blueBtn');
     const purpleBtn = document.getElementById('purpleBtn');
+
+    pulseToggle.checked = pulseEnabled;
 
     slider.addEventListener('input', () => {
       bpmDisplay.textContent = slider.value;
@@ -289,40 +361,46 @@
     }
 
     function tick() {
-      pulse();
+  pulse();  // keep your visual pulse if enabled
 
-      if (audioCtx) {
-        const duration = 0.035;
-        const now = audioCtx.currentTime;
+  if (audioCtx) {
+    const now = audioCtx.currentTime;
+    const duration = 0.65;  // long fade for exhale-like feel
 
-        const bufferSize = audioCtx.sampleRate * duration;
-        const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
-        const data = buffer.getChannelData(0);
-        for (let i = 0; i < bufferSize; i++) {
-          data[i] = Math.random() * 2 - 1;
-        }
+    // Primary low tone (grounding, warm sine)
+    const osc1 = audioCtx.createOscillator();
+    osc1.type = 'sine';
+    osc1.frequency.value = 100;  // low, soothing frequency
 
-        const noise = audioCtx.createBufferSource();
-        noise.buffer = buffer;
+    // Secondary subtle harmonic (adds soft chime richness without sharpness)
+    const osc2 = audioCtx.createOscillator();
+    osc2.type = 'triangle';  // slightly warmer
+    osc2.frequency.value = 200;  // octave higher, very quiet
 
-        const bandpass = audioCtx.createBiquadFilter();
-        bandpass.type = 'bandpass';
-        bandpass.frequency.value = 1800;
-        bandpass.Q.value = 4;
+    // Low-pass filter for velvet softness
+    const filter = audioCtx.createBiquadFilter();
+    filter.type = 'lowpass';
+    filter.frequency.value = 700;
+    filter.Q.value = 0.7;
 
-        const gain = audioCtx.createGain();
-        gain.gain.setValueAtTime(0.0, now);
-        gain.gain.linearRampToValueAtTime(0.45, now + 0.004);
-        gain.gain.exponentialRampToValueAtTime(0.001, now + duration);
+    // Envelope: very slow gentle rise + long smooth fade
+    const gainNode = audioCtx.createGain();
+    gainNode.gain.setValueAtTime(0.00, now);
+    gainNode.gain.linearRampToValueAtTime(0.38, now + 0.12);  // moderate volume, slow attack
+    gainNode.gain.exponentialRampToValueAtTime(0.0005, now + duration);
 
-        noise.connect(bandpass);
-        bandpass.connect(gain);
-        gain.connect(audioCtx.destination);
+    // Connect
+    osc1.connect(filter);
+    osc2.connect(filter);
+    filter.connect(gainNode);
+    gainNode.connect(audioCtx.destination);
 
-        noise.start(now);
-        noise.stop(now + duration);
-      }
-    }
+    osc1.start(now);
+    osc1.stop(now + duration);
+    osc2.start(now);
+    osc2.stop(now + duration);
+  }
+}
 
     function startPulse() {
       if (isRunning) return;
