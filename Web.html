@@ -5,10 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
   <title>Neuro Calm — 50–60 BPM</title>
   
-  <!-- Google Fonts: Nunito (regular 400) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 
   <style>
     * { margin:0; padding:0; box-sizing:border-box; }
@@ -16,7 +15,7 @@
     body {
       height:100vh;
       background:#2d2d2d;
-      color:#e2e8f0;
+      color:#1e293b;
       font-family:'Nunito',system-ui,-apple-system,BlinkMacOSystemFont,'Segoe UI',Roboto,sans-serif;
       display:flex;
       flex-direction:column;
@@ -25,6 +24,39 @@
       transition:background-color 0.12s ease-out;
       overflow:hidden;
       touch-action:manipulation;
+      position:relative;
+    }
+
+    .top-left-buttons {
+      position:absolute;
+      top:0.8rem;
+      left:1rem;
+      display:flex;
+      flex-direction:column;
+      gap:0.8rem;
+      z-index:100;
+      padding-right:1rem;
+    }
+
+    .use-btn, .directions-btn {
+      background:#A3CFFA;
+      color:#ffffff;
+      border:none;
+      border-radius:12px;
+      padding:0.7rem 1.4rem;
+      font-size:0.95rem;
+      font-weight:600;
+      cursor:pointer;
+      transition:all 0.2s ease;
+      box-shadow:0 2px 8px rgba(0,0,0,0.3);
+      text-shadow:0 1px 3px rgba(0,0,0,0.4);
+      white-space:nowrap;
+    }
+
+    .use-btn:hover, .directions-btn:hover {
+      background:#8ab8e8;
+      transform:translateY(-1px);
+      box-shadow:0 4px 12px rgba(163,207,250,0.35);
     }
 
     .logo-container {
@@ -32,15 +64,14 @@
       flex-direction:column;
       align-items:center;
       gap:1.2rem;
-      margin-bottom:2.5rem;
+      margin-bottom:2.2rem;
+      margin-top:4rem;
     }
 
     .logo {
       width:130px;
       height:auto;
       max-width:38vw;
-      /* border-radius:50%; */           /* ← removed / commented out */
-      /* overflow:hidden; */             /* ← removed / commented out */
       background:transparent;
       filter:drop-shadow(0 5px 14px rgba(0,0,0,0.28)) brightness(1.05);
       transition:transform 0.3s ease;
@@ -51,7 +82,7 @@
     h1 {
       font-size:2rem;
       font-weight:400;
-      color:#a5b4fc;
+      color:#A3CFFA;
       margin:0;
       letter-spacing:1.2px;
       text-shadow:0 2px 10px rgba(0,0,0,0.35);
@@ -61,7 +92,7 @@
       background:rgba(45,45,45,0.78);
       backdrop-filter:blur(14px);
       border-radius:32px;
-      padding:2.8rem 2rem;
+      padding:2.4rem 1.8rem;
       width:92%;
       max-width:400px;
       border:1px solid rgba(148,163,184,0.12);
@@ -69,22 +100,30 @@
       display:flex;
       flex-direction:column;
       align-items:center;
-      gap:2.6rem;
+      gap:1.8rem;
+    }
+
+    .bpm-section {
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:0.6rem;
+      width:100%;
     }
 
     #bpm-display {
       font-size:5.6rem;
       font-weight:400;
-      color:#a5b4fc;
-      text-shadow:0 4px 18px rgba(165,180,252,0.25);
+      color:#A3CFFA;
+      text-shadow:0 4px 18px rgba(163,207,250,0.35);
       line-height:1;
-      margin-bottom:0.8rem;
+      margin:0;
     }
 
     input[type="range"] {
       width:100%;
       height:10px;
-      margin:1rem 0 2rem 0;
+      margin:0.4rem 0 0.8rem 0;
       background:rgba(148,163,184,0.22);
       border-radius:5px;
       appearance:none;
@@ -95,19 +134,19 @@
       appearance:none;
       width:32px;
       height:32px;
-      background:#a5b4fc;
+      background:#A3CFFA;
       border-radius:50%;
-      box-shadow:0 4px 14px rgba(165,180,252,0.4);
+      box-shadow:0 4px 14px rgba(163,207,250,0.45);
       cursor:pointer;
     }
 
     input[type="range"]::-moz-range-thumb {
       width:32px;
       height:32px;
-      background:#a5b4fc;
+      background:#A3CFFA;
       border:none;
       border-radius:50%;
-      box-shadow:0 4px 14px rgba(165,180,252,0.4);
+      box-shadow:0 4px 14px rgba(163,207,250,0.45);
       cursor:pointer;
     }
 
@@ -115,26 +154,14 @@
       display:flex;
       flex-direction:column;
       align-items:center;
-      gap:2.2rem;
+      gap:1.2rem;
       width:100%;
     }
 
-    .main-row { width:100%; text-align:center; }
-
-    .options-row {
-      display:flex;
-      flex-wrap:wrap;
-      gap:1.6rem 2.4rem;
-      justify-content:center;
-      align-items:center;
+    .main-row {
       width:100%;
-    }
-
-    .color-group {
-      display:flex;
-      flex-wrap:nowrap;
-      gap:1rem;
-      align-items:center;
+      text-align:center;
+      margin-top:0.3rem;
     }
 
     button {
@@ -145,8 +172,7 @@
       border-radius:22px;
       cursor:pointer;
       transition:all 0.26s ease;
-      letter-spacing:0.4px;
-      min-width:120px;
+      min-width:170px;
       touch-action:manipulation;
     }
 
@@ -155,23 +181,18 @@
     #startStop {
       background:#334155;
       color:#f1f5f9;
-      min-width:170px;
     }
     #startStop.running {
       background:#475569;
       color:#e2e8f0;
     }
 
-    #blueBtn { background:#1e40af; color:white; }
-    #blueBtn.active {
-      background:#3b82f6;
-      box-shadow:0 0 0 4px rgba(59,130,246,0.38);
-    }
-
-    #purpleBtn { background:#6d28d9; color:white; }
-    #purpleBtn.active {
-      background:#8b5cf6;
-      box-shadow:0 0 0 4px rgba(139,92,246,0.38);
+    .options-section {
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:1.4rem;
+      width:100%;
     }
 
     .pulse-control {
@@ -181,6 +202,31 @@
       font-size:1.15rem;
       color:#cbd5e1;
       font-weight:400;
+    }
+
+    .color-group {
+      display:flex;
+      gap:1rem;
+      flex-wrap:nowrap;
+      justify-content:center;
+    }
+
+    #blueBtn {
+      background:#1e40af;
+      color:white;
+    }
+    #blueBtn.active {
+      background:#3b82f6;
+      box-shadow:0 0 0 4px rgba(59,130,246,0.5);
+    }
+
+    #purpleBtn {
+      background:#6d28d9;
+      color:white;
+    }
+    #purpleBtn.active {
+      background:#8b5cf6;
+      box-shadow:0 0 0 4px rgba(139,92,246,0.5);
     }
 
     .switch {
@@ -213,7 +259,7 @@
       border-radius:50%;
     }
 
-    input:checked + .slider { background-color:#a5b4fc; }
+    input:checked + .slider { background-color:#A3CFFA; }
 
     input:checked + .slider:before { transform:translateX(30px); }
 
@@ -222,42 +268,139 @@
       transition:background-color 0.09s ease-out;
     }
 
-    @media (prefers-reduced-motion: reduce) {
-      body.pulse-on, body { transition:none; }
+    /* Full-screen modals with solid cool blue border */
+    .modal-overlay {
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,0.8);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      z-index:1000;
+      opacity:0;
+      pointer-events:none;
+      transition:opacity 0.3s ease;
+    }
+
+    .modal-overlay.active {
+      opacity:1;
+      pointer-events:all;
+    }
+
+    .modal-content {
+      background:#ffffff;
+      width:100vw;
+      height:100vh;
+      overflow-y:auto;
+      padding:3rem 2rem;
+      position:relative;
+      border:20px solid #A3CFFA;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      text-align:center;
+    }
+
+    .modal-close {
+      position:absolute;
+      top:1.5rem;
+      right:1.5rem;
+      background:#A3CFFA;
+      color:#ffffff;
+      border:none;
+      border-radius:50%;
+      width:40px;
+      height:40px;
+      font-size:1.8rem;
+      font-weight:bold;
+      cursor:pointer;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      box-shadow:0 4px 12px rgba(0,0,0,0.3);
+    }
+
+    .modal-header {
+      margin:2rem 0 1.5rem;
+    }
+
+    .modal-logo {
+      width:140px;
+      height:auto;
+      margin-bottom:1.2rem;
+    }
+
+    .modal h2 {
+      font-size:2.2rem;
+      font-weight:700;
+      color:#1e293b;
+      margin:0 0 1.5rem;
+      line-height:1.2;
+    }
+
+    .modal p, .modal li {
+      font-size:1.1rem;
+      line-height:1.7;
+      margin:1rem 0;
+      color:#334155;
+      max-width:800px;
+    }
+
+    .modal ol, .modal ul {
+      text-align:left;
+      padding-left:2rem;
+      margin:1.5rem auto;
+      max-width:800px;
+    }
+
+    .modal .note {
+      font-style:italic;
+      color:#475569;
+      margin-top:0.5rem;
+      display:block;
+    }
+
+    .modal .disclaimer {
+      font-size:0.7rem;                /* even smaller now */
+      font-style:italic;
+      color:#6b7280;                   /* lighter gray */
+      margin:8rem auto 3rem;           /* huge top margin for separation */
+      max-width:800px;
+      line-height:1.4;
+      text-align:center;
+      padding:1rem;
+      background:#f8fafc;              /* very light background box */
+      border:1px solid #e2e8f0;        /* subtle border */
+      border-radius:8px;
     }
 
     .footer {
-      margin-top:2.5rem;
-      font-size:0.95rem;
+      position:absolute;
+      bottom:1.5rem;
+      left:0;
+      right:0;
+      text-align:center;
+      font-size:0.9rem;
       color:#94a3b8;
       opacity:0.8;
-      text-align:center;
-      letter-spacing:0.5px;
+      z-index:10;
     }
 
     .footer a {
-      color:#a5b4fc;
+      color:#A3CFFA;
       text-decoration:none;
-      transition:color 0.3s;
     }
 
     .footer a:hover { color:#c7d2fe; }
-
-    @media (max-height:680px) {
-      .logo-container { margin-bottom:1.8rem; }
-      .container { padding:2.2rem 1.8rem; gap:2rem; }
-      #bpm-display { font-size:5rem; }
-      .logo { width:110px; }
-    }
-
-    @media (max-width:360px) {
-      .options-row { gap:1.2rem 1.6rem; }
-      button { padding:1rem 1.6rem; min-width:110px; font-size:1rem; }
-      .color-group { gap:0.8rem; }
-    }
   </style>
 </head>
 <body>
+
+  <!-- Top-left buttons -->
+  <div class="top-left-buttons">
+    <button class="use-btn" onclick="showModal('info')">Recommended Use</button>
+    <button class="directions-btn" onclick="showModal('directions')">Directions</button>
+  </div>
 
   <div class="logo-container">
     <img src="https://image2url.com/r2/default/images/1773343109118-7c3ecac8-644a-438b-bd91-a0131589492f.png" alt="Neuro Calm Logo" class="logo">
@@ -265,16 +408,17 @@
   </div>
 
   <div class="container">
-    <div id="bpm-display">54</div>
-
-    <input type="range" id="bpm-slider" min="50" max="60" value="54" step="1"/>
+    <div class="bpm-section">
+      <div id="bpm-display">54</div>
+      <input type="range" id="bpm-slider" min="50" max="60" value="54" step="1"/>
+    </div>
 
     <div class="controls">
       <div class="main-row">
         <button id="startStop">START</button>
       </div>
 
-      <div class="options-row">
+      <div class="options-section">
         <div class="pulse-control">
           <span>Light</span>
           <label class="switch">
@@ -291,8 +435,59 @@
     </div>
   </div>
 
+  <!-- Footer always visible -->
   <div class="footer">
     <a href="https://ThriveNeuroHealth.com" target="_blank">ThriveNeuroHealth.com</a>
+  </div>
+
+  <!-- Recommended Use Modal (full screen) -->
+  <div id="info-modal" class="modal-overlay">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeModal('info')">×</button>
+      <div class="modal-header">
+        <img src="https://image2url.com/r2/default/images/1773343109118-7c3ecac8-644a-438b-bd91-a0131589492f.png" alt="Neuro Calm Logo" class="modal-logo">
+        <h2>Neuro Calm<br>Recommended Use</h2>
+      </div>
+      <p>Neuro Calm is a practical, evidence-based calming tool for all ages that works to calm the nervous system within minutes, or even seconds.</p>
+      <p>Use Neuro Calm to help</p>
+      <ul>
+        <li>Reduce intense emotions such as anxiety, anger, or fear</li>
+        <li>Improve focus and decrease impulsivity</li>
+        <li>Fall asleep faster and stay asleep</li>
+      </ul>
+      <p>For the best results, use Neuro Calm at the first sign of distress or overwhelm. For parents, using Neuro Calm at the earliest signs of a child’s dysregulation can often prevent a meltdown and may even help stop one once it has begun.</p>
+      <p>Neuro Calm can be used as often as needed, or proactively in the morning and evening, to support the brain’s calming networks and help regulate the nervous system.</p>
+
+      <h3>Why it Works</h3>
+      <p>When a person's brain and nervous system feel disorganized, the rhythm of a metronome restores a sense of organization. The consistent beat provides an anchor for attention, reduces cognitive load, and synchronizes neural networks across the brain, promoting a calmer, more regulated state.</p>
+      <p>Directing the sound specifically to the left ear stimulates the right hemisphere of the brain, which serves to regulate and calm a person’s stress response.</p>
+
+      <p class="disclaimer">This information has not been evaluated by the FDA and is not intended to diagnose, treat, prevent or cure any disease.</p>
+    </div>
+  </div>
+
+  <!-- Directions Modal (full screen) -->
+  <div id="directions-modal" class="modal-overlay">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeModal('directions')">×</button>
+      <div class="modal-header">
+        <img src="https://image2url.com/r2/default/images/1773343109118-7c3ecac8-644a-438b-bd91-a0131589492f.png" alt="Neuro Calm Logo" class="modal-logo">
+        <h2>Neuro Calm<br>Directions</h2>
+      </div>
+      <ol>
+        <li>Adjust the metronome to your preferred BPM. 54 BPM is the default and is often most effective for calming.</li>
+        <li>If desired, turn the Flash toggle on and select a color.
+          <span class="note">*Note: For most people, the flash enhances the calming effect. However, a small number of individuals may experience a startle response. Test the flash first to see how you (or your child) respond before using it with the metronome.</span>
+        </li>
+        <li>While you (or your child) face forward, hold the phone on the left side of the head so that the sound is directed into the left ear.
+          <span class="note">*Note: Do not hold the phone on the right side of the head. Doing so stimulates excitatory networks in the brain and will have a stimulating effect.</span>
+        </li>
+        <li>If the flash is on, position the phone so the light flashes primarily into the left eye.</li>
+        <li>Continue for 1-2 minutes in a dimly lit or dark room.</li>
+      </ol>
+
+      <p class="disclaimer">This information has not been evaluated by the FDA and is not intended to diagnose, treat, prevent or cure any disease.</p>
+    </div>
   </div>
 
   <script>
@@ -336,36 +531,15 @@
       pulse();
 
       if (audioCtx) {
-        const now = audioCtx.currentTime;
-        const duration = 0.65;
-
-        const osc1 = audioCtx.createOscillator();
-        osc1.type = 'sine';
-        osc1.frequency.value = 140;
-
-        const osc2 = audioCtx.createOscillator();
-        osc2.type = 'triangle';
-        osc2.frequency.value = 280;
-
-        const filter = audioCtx.createBiquadFilter();
-        filter.type = 'lowpass';
-        filter.frequency.value = 700;
-        filter.Q.value = 0.7;
-
-        const gainNode = audioCtx.createGain();
-        gainNode.gain.setValueAtTime(0.00, now);
-        gainNode.gain.linearRampToValueAtTime(0.38, now + 0.12);
-        gainNode.gain.exponentialRampToValueAtTime(0.0005, now + duration);
-
-        osc1.connect(filter);
-        osc2.connect(filter);
-        filter.connect(gainNode);
-        gainNode.connect(audioCtx.destination);
-
-        osc1.start(now);
-        osc1.stop(now + duration);
-        osc2.start(now);
-        osc2.stop(now + duration);
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.frequency.value = 880;
+        gain.gain.setValueAtTime(0.4, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.03);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.03);
       }
     }
 
@@ -425,6 +599,25 @@
       pulseColor = 'purple';
       purpleBtn.classList.add('active');
       blueBtn.classList.remove('active');
+    });
+
+    // Modal functions
+    function showModal(type) {
+      const modal = document.getElementById(type + '-modal');
+      modal.classList.add('active');
+    }
+
+    function closeModal(type) {
+      const modal = document.getElementById(type + '-modal');
+      modal.classList.remove('active');
+    }
+
+    document.querySelectorAll('.modal-overlay').forEach(overlay => {
+      overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) {
+          overlay.classList.remove('active');
+        }
+      });
     });
   </script>
 </body>
