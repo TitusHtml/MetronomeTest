@@ -61,7 +61,7 @@
 
     .logo { width:110px; }
 
-    h1 { font-size:2.2rem; color:var(--gray-blue); }
+    h1 { font-size:3rem; color:var(--gray-blue); }
 
     .main-container {
       background:rgba(45,45,45,0.85);
@@ -485,7 +485,7 @@
         highBoost.gain.value = 18;
 
         const gain = audioCtx.createGain();
-        gain.gain.setValueAtTime(2.2, audioCtx.currentTime); // much louder
+        gain.gain.setValueAtTime(3, audioCtx.currentTime); // much louder
         gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.045);
 
         noise.connect(lowPass);
