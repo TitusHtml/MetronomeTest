@@ -40,7 +40,7 @@
 
     .info-btn, .directions-btn {
       background:var(--gray-blue);
-      color:#000;
+      color:#fff;
       border:none;
       border-radius:12px;
       padding:8px 16px;
@@ -200,8 +200,8 @@
       border:28px solid var(--gray-blue);
       display:flex;
       flex-direction:column;
-      align-items:center;
-      text-align:center;
+      align-items:flex-start;
+      text-align:left;
       position:relative;
       color:#000;
     }
@@ -214,10 +214,10 @@
       color:white;
       border:none;
       border-radius:50%;
-      width:44px;
-      height:44px;
+      width:48px;
+      height:48px;
       font-size:2rem;
-      line-height:44px;
+      line-height:48px;
       text-align:center;
       cursor:pointer;
       z-index:10;
@@ -225,15 +225,35 @@
 
     .modal-logo { width:130px; margin-bottom:1rem; }
 
-    .modal h2 { font-size:2.4rem; font-weight:700; color:#000; margin:0.5rem 0 1.5rem; }
+    .modal-header {
+      display:flex;
+      align-items:center;
+      gap:1.5rem;
+      width:100%;
+      margin-bottom:2rem;
+    }
 
-    .modal .subtitle { font-size:1.5rem; font-weight:600; color:#000; margin-bottom:1.2rem; }
+    .modal-title-group {
+      text-align:left;
+    }
 
-    .modal p, .modal li { font-size:1.15rem; line-height:1.65; margin:0.8rem 0; color:#000; max-width:100%; }
+    .modal h2 { font-size:3.2rem; font-weight:700; color:#000; margin:0; }
+
+    .modal p, .modal li { 
+      font-size:1.15rem; 
+      line-height:1.65; 
+      margin:0.8rem 0; 
+      color:#000; 
+      text-align:left; 
+    }
+
+    .modal ul, .modal ol { 
+      padding-left:2rem; 
+      margin:1.2rem 0 1.2rem 2rem; /* align paragraphs with bullets */
+      color:#000;
+    }
 
     .modal strong { font-weight:700; color:#000; }
-
-    .modal ol, .modal ul { text-align:left; padding-left:2rem; margin:1.2rem 0; color:#000; }
 
     .modal .note { font-style:italic; color:#333; margin:0.6rem 0 1rem; }
 
@@ -308,9 +328,12 @@
     <div class="modal-wrapper">
       <button class="modal-close">×</button>
       <div class="modal-header">
-        <img src="https://image2url.com/r2/default/images/1773343109118-7c3ecac8-644a-438b-bd91-a0131589492f.png" alt="Logo" class="modal-logo">
-        <h2>Neuro Calm</h2>
-        <div class="subtitle">Recommended Use</div>
+        <div class="modal-logo-and-title">
+          <img src="https://image2url.com/r2/default/images/1773343109118-7c3ecac8-644a-438b-bd91-a0131589492f.png" alt="Logo" class="modal-logo">
+          <div class="modal-title-group">
+            <h2>Recommended Use</h2>
+          </div>
+        </div>
       </div>
 
       <p><strong>Neuro Calm</strong> is a practical, evidence-based calming tool for all ages that works to calm the nervous system within minutes, or even seconds.</p>
@@ -348,9 +371,12 @@
     <div class="modal-wrapper">
       <button class="modal-close">×</button>
       <div class="modal-header">
-        <img src="https://image2url.com/r2/default/images/1773343109118-7c3ecac8-644a-438b-bd91-a0131589492f.png" alt="Logo" class="modal-logo">
-        <h2>Neuro Calm</h2>
-        <div class="subtitle">Directions</div>
+        <div class="modal-logo-and-title">
+          <img src="https://image2url.com/r2/default/images/1773343109118-7c3ecac8-644a-438b-bd91-a0131589492f.png" alt="Logo" class="modal-logo">
+          <div class="modal-title-group">
+            <h2>Directions</h2>
+          </div>
+        </div>
       </div>
 
       <ol>
@@ -423,6 +449,13 @@
         if (overlay) overlay.classList.remove('active');
       }
 
+      document.querySelectorAll('.modal-close').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const overlay = btn.closest('.modal-overlay');
+          if (overlay) overlay.classList.remove('active');
+        });
+      });
+
       function flash() {
         if (!lightEnabled) return;
         document.body.style.transition = 'none';
@@ -452,7 +485,7 @@
         highBoost.gain.value = 18;
 
         const gain = audioCtx.createGain();
-        gain.gain.setValueAtTime(1.25, audioCtx.currentTime); // louder
+        gain.gain.setValueAtTime(1.8, audioCtx.currentTime); // much louder
         gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.045);
 
         noise.connect(lowPass);
