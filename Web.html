@@ -485,7 +485,7 @@
         highBoost.gain.value = 18;
 
         const gain = audioCtx.createGain();
-        gain.gain.setValueAtTime(6, audioCtx.currentTime); // much louder
+        gain.gain.setValueAtTime(15, audioCtx.currentTime); // much louder
         gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.045);
 
         noise.connect(lowPass);
