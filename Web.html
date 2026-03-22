@@ -29,12 +29,13 @@
       touch-action:manipulation;
     }
 
-    .top-right-buttons {
+    .header-buttons {
       position:absolute;
       top:16px;
-      right:16px;
+      left:50%;
+      transform:translateX(-50%);
       display:flex;
-      gap:12px;
+      gap:16px;
       z-index:100;
     }
 
@@ -52,7 +53,7 @@
     }
 
     .logo-container {
-      margin:40px 0 20px;
+      margin:80px 0 20px;
       display:flex;
       flex-direction:column;
       align-items:center;
@@ -61,7 +62,7 @@
 
     .logo { width:110px; }
 
-    h1 { font-size:3rem; color:var(--gray-blue); }
+    h1 { font-size:2.2rem; color:var(--gray-blue); }
 
     .main-container {
       background:rgba(45,45,45,0.85);
@@ -249,13 +250,19 @@
 
     .modal ul, .modal ol { 
       padding-left:2rem; 
-      margin:1.2rem 0 1.2rem 2rem; /* align paragraphs with bullets */
+      margin:1.2rem 0 1.2rem 2rem; 
       color:#000;
     }
 
     .modal strong { font-weight:700; color:#000; }
 
     .modal .note { font-style:italic; color:#333; margin:0.6rem 0 1rem; }
+
+    .modal h3 { 
+      font-size:1.8rem; 
+      margin:4rem 0 1rem 0; /* extra space above "Why it Works" */
+      color:#000; 
+    }
 
     .modal .disclaimer-wrapper { margin:8rem auto 4rem; width:90%; }
 
@@ -271,6 +278,15 @@
       line-height:1.5;
     }
 
+    .modal .footer-link {
+      margin:2rem 0 1rem 0;
+      font-size:1rem;
+      text-align:center;
+      width:100%;
+    }
+
+    .modal .footer-link a { color:var(--gray-blue); text-decoration:none; }
+
     .footer {
       position:absolute;
       bottom:1.5rem;
@@ -283,7 +299,7 @@
 </head>
 <body>
 
-  <div class="top-right-buttons">
+  <div class="header-buttons">
     <button class="info-btn">Recommended Use</button>
     <button class="directions-btn">Directions</button>
   </div>
@@ -336,7 +352,7 @@
         </div>
       </div>
 
-      <p><strong>Neuro Calm</strong> is a practical, evidence-based calming tool for all ages that works to calm the nervous system within minutes, or even seconds.</p>
+      <p><strong>Neuro Calm</strong> works to calm the nervous system within minutes, or even seconds.</p>
 
       <p><strong>Use Neuro Calm to help</strong></p>
       <ul>
@@ -350,18 +366,18 @@
       <p>For parents, using <strong>Neuro Calm</strong> at the earliest signs of a child’s dysregulation can often <strong>prevent a meltdown</strong> and may even help stop one once it has begun.</p>
 
       <p><strong>Neuro Calm</strong> can be used as often as needed, or proactively in the morning and evening, to support the brain’s calming networks and help regulate the nervous system.</p>
-
+      <p>∙</p>
       <h3>Why it Works</h3>
       <p>When a person's brain and nervous system feel disorganized, the rhythm of a metronome restores a sense of organization. The consistent beat provides an anchor for attention, reduces cognitive load, and synchronizes neural networks across the brain, promoting a calmer, more regulated state.</p>
 
       <p>Directing the sound specifically to the left ear stimulates the right hemisphere of the brain, which serves to regulate and calm a person’s stress response.</p>
 
-      <div class="disclaimer-wrapper">
-        <p class="disclaimer">This information has not been evaluated by the FDA and is not intended to diagnose, treat, prevent or cure any disease.</p>
-      </div>
-
       <div class="footer-link">
         <a href="https://ThriveNeuroHealth.com" target="_blank">ThriveNeuroHealth.com</a>
+      </div>
+
+      <div class="disclaimer-wrapper">
+        <p class="disclaimer">This information has not been evaluated by the FDA and is not intended to diagnose, treat, prevent or cure any disease.</p>
       </div>
     </div>
   </div>
@@ -387,12 +403,12 @@
         <li>Continue for 1-2 minutes in a dimly lit or dark room.</li>
       </ol>
 
-      <div class="disclaimer-wrapper">
-        <p class="disclaimer">This information has not been evaluated by the FDA and is not intended to diagnose, treat, prevent or cure any disease.</p>
-      </div>
-
       <div class="footer-link">
         <a href="https://ThriveNeuroHealth.com" target="_blank">ThriveNeuroHealth.com</a>
+      </div>
+
+      <div class="disclaimer-wrapper">
+        <p class="disclaimer">This information has not been evaluated by the FDA and is not intended to diagnose, treat, prevent or cure any disease.</p>
       </div>
     </div>
   </div>
@@ -485,7 +501,7 @@
         highBoost.gain.value = 18;
 
         const gain = audioCtx.createGain();
-        gain.gain.setValueAtTime(15, audioCtx.currentTime); // much louder
+        gain.gain.setValueAtTime(1.8, audioCtx.currentTime);
         gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.045);
 
         noise.connect(lowPass);
